@@ -9,7 +9,6 @@ public class Idle : State
         SetContext(context);
     }
 
-    public override void Tick(){
-        Debug.Log("Hey bro estoy Idle");        
+    public override void Tick(){     
     }
 }
