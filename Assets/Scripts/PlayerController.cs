@@ -6,9 +6,17 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     protected State _state = null;
+    public Vector3 move;
+    public int SpeedMultiplier;
     [SerializeField] private InputPlayerControls _controls;
     
     // Start is called before the first frame update
+    void Awake(){
+        _controls = new InputPlayerControls();
+        _controls.Move.Move.performed += OnMove;
+        _controls.Move.Move.canceled += ctx => move = Vector3.zero;
+    }
+
     void Start()
     {
         
@@ -25,9 +33,7 @@ public class PlayerController : MonoBehaviour
         _state = state;
     }
 
-    void OnEnable(){
-        _controls = new InputPlayerControls();
-        _controls.Move.Move.performed +=  OnMove;
+    void OnEnable(){                
         _controls.Move.Move.Enable();
     }
 
@@ -37,7 +43,7 @@ public class PlayerController : MonoBehaviour
     }
 
     void OnMove (InputAction.CallbackContext context){
-        Debug.Log(context);
+        move = new Vector3(context.ReadValue<Vector2>().x, 0 , context.ReadValue<Vector2>().y);
         SetState(new Walking(this));
     }
 }
