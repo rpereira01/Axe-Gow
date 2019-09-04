@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     protected State _state = null;
     public Vector3 move;
+    public Vector3 rotate;
     public int SpeedMultiplier;
     [SerializeField] private InputPlayerControls _controls;
     
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
         _controls = new InputPlayerControls();
         _controls.Move.Move.performed += OnMove;
         _controls.Move.Move.canceled += ctx => move = Vector3.zero;
+        _controls.Move.Rotate.performed += OnRotate;
+        _controls.Move.Rotate.canceled += ctx => rotate = Vector3.zero;
     }
 
     void Start()
@@ -45,5 +48,10 @@ public class PlayerController : MonoBehaviour
     void OnMove (InputAction.CallbackContext context){
         move = new Vector3(context.ReadValue<Vector2>().x, 0 , context.ReadValue<Vector2>().y);
         SetState(new Walking(this));
+    }
+
+    void OnRotate (InputAction.CallbackContext context){
+        rotate = new Vector3(context.ReadValue<Vector2>().x, 0 , context.ReadValue<Vector2>().y);
+        // SetState(new Walking(this));
     }
 }
