@@ -14,13 +14,21 @@ public class InputPlayerControls : IInputActionCollection
     ""name"": ""InputPlayerControls"",
     ""maps"": [
         {
-            ""name"": ""Move"",
+            ""name"": ""Movement"",
             ""id"": ""6cd03756-82fc-49ec-b8ef-c237bb926991"",
             ""actions"": [
                 {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""defe3037-8b99-44fe-acdf-ed3074cdeee6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""2924c146-9606-4917-8495-f86c932f3826"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -81,15 +89,38 @@ public class InputPlayerControls : IInputActionCollection
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86e21187-a543-41a1-8912-3fe86bc64370"",
+                    ""path"": ""<Mouse>/radius"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a2a9c919-2f05-4f7c-aca8-4b877b6215f5"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
     ""controlSchemes"": []
 }");
-        // Move
-        m_Move = asset.GetActionMap("Move");
-        m_Move_Move = m_Move.GetAction("Move");
+        // Movement
+        m_Movement = asset.GetActionMap("Movement");
+        m_Movement_Move = m_Movement.GetAction("Move");
+        m_Movement_Rotate = m_Movement.GetAction("Rotate");
     }
 
     ~InputPlayerControls()
@@ -136,40 +167,49 @@ public class InputPlayerControls : IInputActionCollection
         asset.Disable();
     }
 
-    // Move
-    private readonly InputActionMap m_Move;
-    private IMoveActions m_MoveActionsCallbackInterface;
-    private readonly InputAction m_Move_Move;
-    public struct MoveActions
+    // Movement
+    private readonly InputActionMap m_Movement;
+    private IMovementActions m_MovementActionsCallbackInterface;
+    private readonly InputAction m_Movement_Move;
+    private readonly InputAction m_Movement_Rotate;
+    public struct MovementActions
     {
         private InputPlayerControls m_Wrapper;
-        public MoveActions(InputPlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Move => m_Wrapper.m_Move_Move;
-        public InputActionMap Get() { return m_Wrapper.m_Move; }
+        public MovementActions(InputPlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Movement_Move;
+        public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
+        public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(MoveActions set) { return set.Get(); }
-        public void SetCallbacks(IMoveActions instance)
+        public static implicit operator InputActionMap(MovementActions set) { return set.Get(); }
+        public void SetCallbacks(IMovementActions instance)
         {
-            if (m_Wrapper.m_MoveActionsCallbackInterface != null)
+            if (m_Wrapper.m_MovementActionsCallbackInterface != null)
             {
-                Move.started -= m_Wrapper.m_MoveActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_MoveActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_MoveActionsCallbackInterface.OnMove;
+                Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
             }
-            m_Wrapper.m_MoveActionsCallbackInterface = instance;
+            m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
             {
                 Move.started += instance.OnMove;
                 Move.performed += instance.OnMove;
                 Move.canceled += instance.OnMove;
+                Rotate.started += instance.OnRotate;
+                Rotate.performed += instance.OnRotate;
+                Rotate.canceled += instance.OnRotate;
             }
         }
     }
-    public MoveActions @Move => new MoveActions(this);
-    public interface IMoveActions
+    public MovementActions @Movement => new MovementActions(this);
+    public interface IMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }

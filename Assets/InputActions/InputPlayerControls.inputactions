@@ -2,13 +2,21 @@
     "name": "InputPlayerControls",
     "maps": [
         {
-            "name": "Move",
+            "name": "Movement",
             "id": "6cd03756-82fc-49ec-b8ef-c237bb926991",
             "actions": [
                 {
                     "name": "Move",
                     "type": "Value",
                     "id": "defe3037-8b99-44fe-acdf-ed3074cdeee6",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "2924c146-9606-4917-8495-f86c932f3826",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -67,6 +75,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86e21187-a543-41a1-8912-3fe86bc64370",
+                    "path": "<Mouse>/radius",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a2a9c919-2f05-4f7c-aca8-4b877b6215f5",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
