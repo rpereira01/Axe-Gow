@@ -9,6 +9,7 @@ public class Idle : State
         SetContext(context);
     }
 
-    public override void Tick(){     
+    public override void Tick(){
+        _context._animator.SetBool("isWalking", false);     
     }
 }

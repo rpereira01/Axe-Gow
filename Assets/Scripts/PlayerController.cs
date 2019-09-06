@@ -10,24 +10,40 @@ public class PlayerController : MonoBehaviour
     public Vector3 _direction;
     public Vector3 _rotation;
     public int SpeedMultiplier;
+
+    private Walking _walkingState;
+    private Idle _idleState;
+    private Aim _aimState;
+
     [SerializeField] private InputPlayerControls _controls;
     [HideInInspector] public Rigidbody _rigidbody;
+    [HideInInspector] public Animator _animator;
     
 
     // Start is called before the first frame update
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _animator = GetComponent<Animator>();
+
+        _idleState = new Idle(this);
+        _aimState = new Aim(this);
+        _walkingState = new Walking(this);
+        
         _controls = new InputPlayerControls();
         _controls.Movement.Move.performed += OnMove;
-        _controls.Movement.Move.canceled += ctx => _direction = Vector3.zero;
+        _controls.Movement.Move.canceled += ctx => 
+            {
+                _direction = Vector3.zero;
+                SetState(_idleState);                
+            };
         _controls.Movement.Rotate.performed += OnRotate;
         _controls.Movement.Rotate.canceled += ctx => _rotation = Vector3.zero;
     }
 
     void Start()
     {        
-        this.SetState(new Idle(this));        
+        this.SetState(_idleState);        
     }
 
     // Update is called once per frame
@@ -73,12 +89,11 @@ public class PlayerController : MonoBehaviour
     void OnMove (InputAction.CallbackContext context)
     {
         _direction = new Vector3(context.ReadValue<Vector2>().x, 0 , context.ReadValue<Vector2>().y);
-        SetState(new Walking(this));
+        SetState(_walkingState);
     }
 
     void OnRotate (InputAction.CallbackContext context)
     {
         _rotation = new Vector3(0, context.ReadValue<Vector2>().x , 0);
-        //SetState(new Walking(this));
     }
 }

@@ -9,8 +9,8 @@ public class Walking : State
         SetContext(context);
     }
     public override void Tick(){
-        // Vector3 m = new Vector3(_context.move.x, _context.move.y, _context.move.z) * Time.deltaTime * _context.SpeedMultiplier;
-        // _context.transform.Translate(m,Space.World);
-        //Set Animation of Walking
+        _context._animator.SetBool("isWalking", true);
+        _context._animator.SetFloat("xAxis", _context._direction.x);
+        _context._animator.SetFloat("zAxis", _context._direction.z);
     }
 }
