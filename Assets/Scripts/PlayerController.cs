@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
     protected State _state = null;
+    private Vector3 camRight;
+    private Vector3 camForward;
     public Vector3 _direction;
     public Vector3 _rotation;
     public int SpeedMultiplier;
@@ -15,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private Idle _idleState;
     private Aim _aimState;
 
+    public GameObject mainCamera;
     [SerializeField] private InputPlayerControls _controls;
     [HideInInspector] public Rigidbody _rigidbody;
     [HideInInspector] public Animator _animator;
@@ -50,7 +54,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         _state.Tick();
-        RotateTo(_rotation);
+        camDirection();
+        RotateTo(_rotation);       
     }
 
     void FixedUpdate()
@@ -59,13 +64,26 @@ public class PlayerController : MonoBehaviour
     }
 
     public void MoveTo(Vector3 direction)
-    {
+    {   direction = direction.x * camRight + direction.z * camForward;
+        gameObject.transform.LookAt(gameObject.transform.position + direction);
         _rigidbody.MovePosition(gameObject.transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime));
     }
 
     public void RotateTo(Vector3 rotation)
     {
-        transform.Rotate(rotation * 100f * Time.deltaTime, Space.World);
+        transform.Rotate(rotation * 150f * Time.deltaTime, Space.World);
+        // transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, mainCamera.transform.localEulerAngles.y, transform.localEulerAngles.z);        
+    }
+
+    void camDirection(){
+        camRight = mainCamera.transform.right;
+        camForward = mainCamera.transform.forward;
+
+        camRight.y = 0;
+        camForward.y = 0;
+
+        camRight = camRight.normalized;
+        camForward = camForward.normalized;
     }
 
     void SetState (State state){
