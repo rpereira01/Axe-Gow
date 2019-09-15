@@ -182,7 +182,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 Y
     m_InputAxisValue: 0
-    m_InvertInput: 0
+    m_InvertInput: 1
     m_MinValue: 0
     m_MaxValue: 1
     m_Wrap: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -461,7 +461,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -586,7 +586,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -956,7 +956,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719335030}
-  m_LocalRotation: {x: 0.060600553, y: 0.12724455, z: -0.0077891056, w: 0.98998773}
+  m_LocalRotation: {x: 0.060600556, y: 0.12724453, z: -0.0077891056, w: 0.98998773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1233,7 +1233,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908885106}
-  m_LocalRotation: {x: 0.080685824, y: 0.12706019, z: -0.010370616, w: 0.98855346}
+  m_LocalRotation: {x: 0.080685824, y: 0.12706017, z: -0.010370615, w: 0.98855346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1340,7 +1340,7 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
-    m_InvertInput: 1
+    m_InvertInput: 0
     m_MinValue: -180
     m_MaxValue: 180
     m_Wrap: 1
@@ -1443,7 +1443,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06060056, y: 0.12724459, z: -0.0077890786, w: 0.98998773}
+  m_LocalRotation: {x: 0.060600564, y: 0.12724456, z: -0.007789077, w: 0.98998773}
   m_LocalPosition: {x: 0, y: 2.5, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1503,7 +1503,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.22642015
+  m_Radius: 0.32034764
   m_Height: 1.8245484
   m_Direction: 1
   m_Center: {x: 0.004658684, y: 0.88353294, z: 0.0046586692}
@@ -1521,7 +1521,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!4 &1286341508 stripped
 Transform:
@@ -1529,6 +1529,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1531998382}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1286341509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1286341504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 398bf3e3d9bc41d4daf2a08e0d63d202, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _direction: {x: 0, y: 0, z: 0}
+  _rotation: {x: 0, y: 0, z: 0}
+  SpeedMultiplier: 5
+  mainCamera: {fileID: 963194225}
+  _rigidbody: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!1 &1299893384
 GameObject:
   m_ObjectHideFlags: 0
@@ -1637,6 +1655,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: d2b3573646a76dc4a9618421cf9723d1,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5af9898a5c82bec4cb7922b29cf63c2a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d2b3573646a76dc4a9618421cf9723d1, type: 3}
 --- !u!1 &1724270205
