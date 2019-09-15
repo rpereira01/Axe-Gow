@@ -180,7 +180,7 @@ MonoBehaviour:
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse Y
+    m_InputAxisName: Dualshock4 Y
     m_InputAxisValue: 0
     m_InvertInput: 0
     m_MinValue: 0
@@ -203,7 +203,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -354,7 +354,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144158809}
-  m_LocalRotation: {x: 0.10905961, y: 0.1268233, z: -0.014030362, w: 0.9858119}
+  m_LocalRotation: {x: 0.109061256, y: 0.12670965, z: -0.0140177915, w: 0.9858265}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -459,7 +459,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -584,7 +584,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -956,7 +956,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719335030}
-  m_LocalRotation: {x: 0.06059966, y: 0.12735866, z: -0.007796091, w: 0.98997307}
+  m_LocalRotation: {x: 0.060600553, y: 0.12724455, z: -0.0077891056, w: 0.98998773}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1233,7 +1233,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908885106}
-  m_LocalRotation: {x: 0.080684625, y: 0.12717414, z: -0.010379915, w: 0.9885388}
+  m_LocalRotation: {x: 0.080685824, y: 0.12706019, z: -0.010370616, w: 0.98855346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     m_MaxSpeed: 300
     m_AccelTime: 0.1
     m_DecelTime: 0.1
-    m_InputAxisName: Mouse X
+    m_InputAxisName: Dualshock4 X
     m_InputAxisValue: 0
     m_InvertInput: 1
     m_MinValue: -180
@@ -1443,7 +1443,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.060599662, y: 0.12735865, z: -0.0077960626, w: 0.98997307}
+  m_LocalRotation: {x: 0.06060056, y: 0.12724459, z: -0.0077890786, w: 0.98998773}
   m_LocalPosition: {x: 0, y: 2.5, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
