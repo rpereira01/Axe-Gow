@@ -354,7 +354,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144158809}
-  m_LocalRotation: {x: 0.10906121, y: 0.12670967, z: -0.014017785, w: 0.9858265}
+  m_LocalRotation: {x: 0.109062165, y: 0.12664357, z: -0.014010481, w: 0.98583496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -846,7 +846,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 7, z: 7, w: -10}
+  m_BoundingSphereOverride: {x: -0.0390625, y: 0, z: 9, w: 9}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1025,7 +1025,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719335030}
-  m_LocalRotation: {x: 0.060600553, y: 0.12724455, z: -0.0077890977, w: 0.9899878}
+  m_LocalRotation: {x: 0.060601074, y: 0.12717815, z: -0.007785044, w: 0.9899963}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1302,7 +1302,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908885106}
-  m_LocalRotation: {x: 0.080685824, y: 0.12706017, z: -0.010370617, w: 0.98855346}
+  m_LocalRotation: {x: 0.08068652, y: 0.12699391, z: -0.01036521, w: 0.988562}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1512,7 +1512,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.06060056, y: 0.12724459, z: -0.0077890786, w: 0.98998773}
+  m_LocalRotation: {x: 0.060601085, y: 0.12717816, z: -0.0077850115, w: 0.9899963}
   m_LocalPosition: {x: 0, y: 2.5, z: -2.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1611,7 +1611,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _direction: {x: 0, y: 0, z: 0}
-  SpeedMultiplier: 5
+  _rotation: {x: 0, y: 0, z: 0}
+  SpeedMultiplier: 6.5
   SpeedRotation: 0.08
   mainCamera: {fileID: 963194225}
   _rigidbody: {fileID: 0}

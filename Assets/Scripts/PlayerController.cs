@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 camRight;
     private Vector3 camForward;
     public Vector3 _direction;
+    public Vector3 _rotation;
     [Range(0, 50)] public float SpeedMultiplier;
     [Range(0, 50)] public float SpeedRotation;
 
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
         _idleState = new Idle(this);
         _aimState = new Aim(this);
         _walkingState = new Walking(this);
+        
+        _controls = new InputPlayerControls();
 
         ControlsInitialization();
     }
@@ -45,23 +48,35 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        camDirection();
         _state.Tick();
-        Rotation();
-
+    }
+    void FixedUpdate()
+    {
+        MoveTo();
+    }
+    void LateUpdate()
+    {
+        
     }
 
     private void Rotation()
     {
-        if (_direction != Vector3.zero)
+        if (_rotation != Vector3.zero)
         {
-            Vector3 rotation = _direction;
+            Vector3 rotation = _rotation;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rotation), SpeedRotation);
         }
     }
 
-    void LateUpdate()
-    {
-        camDirection();
+    public void MoveTo()
+    {  
+        if(_direction != Vector3.zero){     
+            Vector3 direction = _direction;           
+            direction = direction.x * camRight + direction.z * camForward;
+            transform.LookAt(transform.position + direction);   
+            _rigidbody.MovePosition(transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime));   
+        }     
     }
 
     void camDirection()
@@ -71,9 +86,6 @@ public class PlayerController : MonoBehaviour
 
         camRight.y = 0;
         camForward.y = 0;
-
-        camRight.Normalize();
-        camForward.Normalize();
     }
 
     void SetState(State state)
@@ -84,22 +96,32 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         _controls.Movement.Move.Enable();
+        _controls.Movement.Rotate.Enable();
     }
 
     void OnDisable()
     {
         _controls.Movement.Move.performed -= OnMove;
+        _controls.Movement.Rotate.performed -= OnRotate;
+
         _controls.Movement.Move.Disable();
+        _controls.Movement.Rotate.Disable();
     }
     private void ControlsInitialization()
     {
-        _controls = new InputPlayerControls();
         _controls.Movement.Move.performed += OnMove;
+        _controls.Movement.Rotate.performed += OnRotate;
+
         _controls.Movement.Move.canceled += ctx =>
         {
             _direction = Vector3.zero;
             SetState(_idleState);
         };
+
+        _controls.Movement.Rotate.canceled += ctx => 
+        {
+            _rotation = Vector3.zero;    
+        };        
     }
 
     void OnMove(InputAction.CallbackContext context)
@@ -108,18 +130,8 @@ public class PlayerController : MonoBehaviour
         SetState(_walkingState);
     }
 
-
-    // public void MoveTo(Vector3 direction)
-    // {  
-    //     direction = direction.x * camRight + direction.z * camForward;
-    //     gameObject.transform.LookAt(gameObject.transform.position + direction);
-    //     _rigidbody.MovePosition(gameObject.transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime)); 
-    // }
-
-    // public void RotateTo(Vector3 rotation)
-    // {
-
-    //     // transform.Rotate(rotation * 150f * Time.deltaTime);
-    //     // transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, mainCamera.transform.localEulerAngles.y, transform.localEulerAngles.z);        
-    // }
+    void OnRotate (InputAction.CallbackContext context)
+    {
+        _rotation = new Vector3(0, context.ReadValue<Vector2>().x , 0);
+    }
 }
