@@ -32,6 +32,14 @@ public class InputPlayerControls : IInputActionCollection
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Triggers"",
+                    ""type"": ""Button"",
+                    ""id"": ""3530e82a-352d-4472-8d64-e9fb71781470"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -111,6 +119,28 @@ public class InputPlayerControls : IInputActionCollection
                     ""action"": ""Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d04b2b9-1fe8-4582-b1b5-e373d76981fa"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3811d82c-7a5d-4f21-aefe-1b1ce6e7737e"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Triggers"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -121,6 +151,7 @@ public class InputPlayerControls : IInputActionCollection
         m_Movement = asset.GetActionMap("Movement");
         m_Movement_Move = m_Movement.GetAction("Move");
         m_Movement_Rotate = m_Movement.GetAction("Rotate");
+        m_Movement_Triggers = m_Movement.GetAction("Triggers");
     }
 
     ~InputPlayerControls()
@@ -172,12 +203,14 @@ public class InputPlayerControls : IInputActionCollection
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Rotate;
+    private readonly InputAction m_Movement_Triggers;
     public struct MovementActions
     {
         private InputPlayerControls m_Wrapper;
         public MovementActions(InputPlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
+        public InputAction @Triggers => m_Wrapper.m_Movement_Triggers;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -193,6 +226,9 @@ public class InputPlayerControls : IInputActionCollection
                 Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                Triggers.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
+                Triggers.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
+                Triggers.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -203,6 +239,9 @@ public class InputPlayerControls : IInputActionCollection
                 Rotate.started += instance.OnRotate;
                 Rotate.performed += instance.OnRotate;
                 Rotate.canceled += instance.OnRotate;
+                Triggers.started += instance.OnTriggers;
+                Triggers.performed += instance.OnTriggers;
+                Triggers.canceled += instance.OnTriggers;
             }
         }
     }
@@ -211,5 +250,6 @@ public class InputPlayerControls : IInputActionCollection
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnTriggers(InputAction.CallbackContext context);
     }
 }
