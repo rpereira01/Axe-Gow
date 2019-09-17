@@ -9,7 +9,8 @@ public class Aim : State
         SetContext(context);
     }
 
-    public override void Tick(){
-        Debug.Log("Aiming");
+    public override void Tick()
+    {
+        _context._animator.SetBool("isAiming",true);
     }
 }

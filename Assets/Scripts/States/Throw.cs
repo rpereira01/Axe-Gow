@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Idle : State 
+public class Throw : State
 {
-    public Idle(PlayerController context)
+    public Throw(PlayerController context)
     {
         SetContext(context);
     }
 
     public override void Tick()
     {
-        _context._animator.SetBool("isWalking", false);     
+        _context._animator.SetBool("isThrowing", true);
     }
 }

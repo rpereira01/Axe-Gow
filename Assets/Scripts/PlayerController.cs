@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private Walking _walkingState;
     private Idle _idleState;
     private Aim _aimState;
+    private Throw _throwState;
 
     public GameObject mainCamera;
     public GameObject Axe;
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
         _idleState = new Idle(this);
         _aimState = new Aim(this);
         _walkingState = new Walking(this);
+        _throwState = new Throw(this);
         
         _controls = new InputPlayerControls();
 
@@ -73,11 +75,17 @@ public class PlayerController : MonoBehaviour
 
     public void MoveTo()
     {  
-        if(_direction != Vector3.zero){     
+        if(_direction != Vector3.zero)
+        {     
             Vector3 direction = _direction;           
             direction = direction.x * camRight + direction.z * camForward;
-            transform.LookAt(transform.position + direction);   
-            _rigidbody.MovePosition(transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime));   
+            transform.LookAt(transform.position + direction);
+
+            if(_state != _aimState)
+            {
+                Debug.Log(_state +""+""+_aimState);
+                _rigidbody.MovePosition(transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime));   
+            }          
         }     
     }
 
@@ -138,7 +146,15 @@ public class PlayerController : MonoBehaviour
 
         _controls.Movement.Triggers.canceled += ctx =>
         {
+            if(ctx.action.activeControl.name.ToString() == "leftTrigger") 
+            {
+                _animator.SetBool("isAiming", false);
+            }
             
+            if(ctx.action.activeControl.name.ToString() == "rightTrigger") 
+            {
+                _animator.SetBool("isThrowing", false);
+            }          
         };
     }
 
@@ -155,6 +171,20 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggers(InputAction.CallbackContext context)
     {
-        Debug.Log(context);
+        if(context.action.activeControl.name.ToString() == "leftTrigger")
+        {
+            if(_state != _throwState)
+            {
+                SetState(_aimState);
+            }            
+        }
+
+        if(context.action.activeControl.name.ToString() == "rightTrigger")
+        {
+            if(_state == _aimState)
+            {
+                SetState(_throwState);
+            }            
+        }
     }
 }
