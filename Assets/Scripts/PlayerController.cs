@@ -83,7 +83,6 @@ public class PlayerController : MonoBehaviour
 
             if(_state != _aimState)
             {
-                Debug.Log(_state +""+""+_aimState);
                 _rigidbody.MovePosition(transform.position + (direction * SpeedMultiplier * Time.fixedDeltaTime));   
             }          
         }     
@@ -173,18 +172,12 @@ public class PlayerController : MonoBehaviour
     {
         if(context.action.activeControl.name.ToString() == "leftTrigger")
         {
-            if(_state != _throwState)
-            {
-                SetState(_aimState);
-            }            
+            return;      
         }
 
         if(context.action.activeControl.name.ToString() == "rightTrigger")
         {
-            if(_state == _aimState)
-            {
-                SetState(_throwState);
-            }            
+            return;   
         }
     }
 }
