@@ -13,8 +13,11 @@ public class PlayerController : MonoBehaviour
     public Vector3 _direction;
     public Vector3 _rotation;
     [Range(0, 50)] public float SpeedMultiplier;
-    [Range(0, 50)] public float SpeedRotation;
+    [Range(0, 1)] public float SpeedRotation;
     [Range(0,100)] public float ThrowPower;
+    public bool _isAiming;
+    public bool _axeThrown;
+    public bool _canPull;
 
     private Walking _walkingState;
     private Idle _idleState;
@@ -50,15 +53,16 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         _state.Tick();
     }
+
     void FixedUpdate()
     {
         MoveTo();
     }
+
     void LateUpdate()
     {        
         camDirection();
@@ -79,6 +83,8 @@ public class PlayerController : MonoBehaviour
         {     
             Vector3 direction = _direction;           
             direction = direction.x * camRight + direction.z * camForward;
+            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), SpeedRotation);
+            // _rigidbody.MoveRotation(Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), SpeedRotation));
             transform.LookAt(transform.position + direction);
 
             if(_state != _aimState)
@@ -101,9 +107,10 @@ public class PlayerController : MonoBehaviour
     {
         _state = state;
     }
-
+    
     public void AxeThrow()
     {
+        _axeThrown = true;
         Axe.GetComponent<Rigidbody>().isKinematic = false;
         Axe.transform.parent = null;
         Axe.GetComponent<Rigidbody>().AddForce(transform.forward * ThrowPower, ForceMode.Impulse);
@@ -126,6 +133,7 @@ public class PlayerController : MonoBehaviour
         _controls.Movement.Rotate.Disable();
         _controls.Movement.Triggers.Disable();
     }
+
     private void ControlsInitialization()
     {
         _controls.Movement.Move.performed += OnMove;
@@ -145,15 +153,16 @@ public class PlayerController : MonoBehaviour
 
         _controls.Movement.Triggers.canceled += ctx =>
         {
-            if(ctx.action.activeControl.name.ToString() == "leftTrigger") 
+            if(_isAiming) 
             {
+                _isAiming = false;
                 _animator.SetBool("isAiming", false);
-            }
-            
-            if(ctx.action.activeControl.name.ToString() == "rightTrigger") 
+            }     
+
+            if(_axeThrown)
             {
-                _animator.SetBool("isThrowing", false);
-            }          
+                _canPull = true;
+            }            
         };
     }
 
@@ -172,12 +181,28 @@ public class PlayerController : MonoBehaviour
     {
         if(context.action.activeControl.name.ToString() == "leftTrigger")
         {
-            return;      
+            _isAiming = true;
+            SetState(_aimState);
+
+            return;     
         }
 
         if(context.action.activeControl.name.ToString() == "rightTrigger")
         {
-            return;   
+            if(!_isAiming)
+            {
+                if(!_axeThrown)
+                {
+                    SetState(_throwState);
+                }                
+            }
+
+            if(_canPull)
+            {
+                //SetState(_pullState);
+            }
+
+            return;
         }
     }
 }

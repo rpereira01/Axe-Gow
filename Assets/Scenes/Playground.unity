@@ -200,7 +200,7 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 180
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Heading:
     m_Definition: 3
     m_VelocityFilterStrength: 4
-    m_Bias: 0
+    m_Bias: -5.6
   m_RecenterToTargetHeading:
     m_enabled: 0
     m_WaitTime: 1
@@ -226,14 +226,14 @@ MonoBehaviour:
     m_LegacyHeadingDefinition: -1
     m_LegacyVelocityFilterStrength: -1
   m_BindingMode: 4
-  m_SplineCurvature: 1
+  m_SplineCurvature: 0.5
   m_Orbits:
-  - m_Height: 5
-    m_Radius: 2.1
+  - m_Height: 6
+    m_Radius: 2.43
   - m_Height: 2
-    m_Radius: 2.5
+    m_Radius: 3.2
   - m_Height: 0
-    m_Radius: 2.1
+    m_Radius: 2.27
   m_LegacyHeadingBias: 3.4028235e+38
   m_Rigs:
   - {fileID: 144158810}
@@ -247,7 +247,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107859823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: -2.5}
+  m_LocalPosition: {x: 0.31226528, y: 2.5, z: -3.1847277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 144158811}
@@ -354,7 +354,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144158809}
-  m_LocalRotation: {x: 0.10906062, y: 0.12675212, z: -0.014022509, w: 0.985821}
+  m_LocalRotation: {x: 0.086244695, y: 0.07862633, z: -0.0068279393, w: 0.9931431}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2, z: -2.5}
+  m_FollowOffset: {x: 0, y: 2, z: -3.2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Heading:
     m_Definition: 3
     m_VelocityFilterStrength: 4
-    m_Bias: 0
+    m_Bias: -5.6
   m_RecenterToTargetHeading:
     m_enabled: 0
     m_WaitTime: 1
@@ -456,7 +456,7 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 180
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2, z: -2.5}
+  m_FollowOffset: {x: 0, y: 2, z: -3.2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -678,7 +678,7 @@ MonoBehaviour:
   m_Heading:
     m_Definition: 3
     m_VelocityFilterStrength: 4
-    m_Bias: 0
+    m_Bias: -5.6
   m_RecenterToTargetHeading:
     m_enabled: 0
     m_WaitTime: 1
@@ -687,7 +687,7 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 180
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
@@ -1185,7 +1185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719335030}
-  m_LocalRotation: {x: 0.060600214, y: 0.12728715, z: -0.0077917227, w: 0.9899823}
+  m_LocalRotation: {x: 0.043835677, y: 0.0788459, z: -0.0034704427, w: 0.99591655}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1462,7 +1462,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908885106}
-  m_LocalRotation: {x: 0.08068536, y: 0.12710275, z: -0.010374088, w: 0.98854804}
+  m_LocalRotation: {x: 0.056135584, y: 0.07879701, z: -0.004444152, w: 0.99529904}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1543,7 +1543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 4
-  m_FollowOffset: {x: 0, y: 2, z: -2.5}
+  m_FollowOffset: {x: 0, y: 2, z: -3.2}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -1555,7 +1555,7 @@ MonoBehaviour:
   m_Heading:
     m_Definition: 3
     m_VelocityFilterStrength: 4
-    m_Bias: 0
+    m_Bias: -5.6
   m_RecenterToTargetHeading:
     m_enabled: 0
     m_WaitTime: 1
@@ -1564,7 +1564,7 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 180
+    m_MaxSpeed: 200
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Dualshock4 X
@@ -1672,8 +1672,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.060600225, y: 0.12728718, z: -0.0077916854, w: 0.9899823}
-  m_LocalPosition: {x: 0, y: 2.5, z: -2.5}
+  m_LocalRotation: {x: 0.04383568, y: 0.0788459, z: -0.0034704357, w: 0.9959165}
+  m_LocalPosition: {x: 0.31226528, y: 2.5, z: -3.1847277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1866,8 +1866,11 @@ MonoBehaviour:
   _direction: {x: 0, y: 0, z: 0}
   _rotation: {x: 0, y: 0, z: 0}
   SpeedMultiplier: 6.5
-  SpeedRotation: 0.08
+  SpeedRotation: 1
   ThrowPower: 22.8
+  _isAiming: 0
+  _axeThrown: 0
+  _canPull: 0
   mainCamera: {fileID: 963194225}
   Axe: {fileID: 256283754}
   _rigidbody: {fileID: 0}

@@ -11,6 +11,15 @@ public class Aim : State
 
     public override void Tick()
     {
-        _context._animator.SetBool("isAiming",true);
+        cameraZoom();
+        if(_context._isAiming) 
+        {
+            _context._animator.SetBool("isAiming",true);            
+        }
+    }
+
+    private void cameraZoom()
+    {
+        //zoom;
     }
 }
