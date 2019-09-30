@@ -34,9 +34,17 @@ public class InputPlayerControls : IInputActionCollection
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Triggers"",
+                    ""name"": ""Left Trigger"",
                     ""type"": ""Button"",
                     ""id"": ""3530e82a-352d-4472-8d64-e9fb71781470"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Right Trigger"",
+                    ""type"": ""Button"",
+                    ""id"": ""d9047ac5-f82a-4ebb-839d-0252f8a74938"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -127,7 +135,7 @@ public class InputPlayerControls : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Triggers"",
+                    ""action"": ""Left Trigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -138,7 +146,18 @@ public class InputPlayerControls : IInputActionCollection
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Triggers"",
+                    ""action"": ""Right Trigger"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""def7e11b-c427-46eb-8900-3aea9410c787"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Right Trigger"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -151,7 +170,8 @@ public class InputPlayerControls : IInputActionCollection
         m_Movement = asset.GetActionMap("Movement");
         m_Movement_Move = m_Movement.GetAction("Move");
         m_Movement_Rotate = m_Movement.GetAction("Rotate");
-        m_Movement_Triggers = m_Movement.GetAction("Triggers");
+        m_Movement_LeftTrigger = m_Movement.GetAction("Left Trigger");
+        m_Movement_RightTrigger = m_Movement.GetAction("Right Trigger");
     }
 
     ~InputPlayerControls()
@@ -203,14 +223,16 @@ public class InputPlayerControls : IInputActionCollection
     private IMovementActions m_MovementActionsCallbackInterface;
     private readonly InputAction m_Movement_Move;
     private readonly InputAction m_Movement_Rotate;
-    private readonly InputAction m_Movement_Triggers;
+    private readonly InputAction m_Movement_LeftTrigger;
+    private readonly InputAction m_Movement_RightTrigger;
     public struct MovementActions
     {
         private InputPlayerControls m_Wrapper;
         public MovementActions(InputPlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
-        public InputAction @Triggers => m_Wrapper.m_Movement_Triggers;
+        public InputAction @LeftTrigger => m_Wrapper.m_Movement_LeftTrigger;
+        public InputAction @RightTrigger => m_Wrapper.m_Movement_RightTrigger;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -226,9 +248,12 @@ public class InputPlayerControls : IInputActionCollection
                 Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
                 Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                Triggers.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
-                Triggers.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
-                Triggers.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnTriggers;
+                LeftTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                LeftTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                LeftTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                RightTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
+                RightTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
+                RightTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -239,9 +264,12 @@ public class InputPlayerControls : IInputActionCollection
                 Rotate.started += instance.OnRotate;
                 Rotate.performed += instance.OnRotate;
                 Rotate.canceled += instance.OnRotate;
-                Triggers.started += instance.OnTriggers;
-                Triggers.performed += instance.OnTriggers;
-                Triggers.canceled += instance.OnTriggers;
+                LeftTrigger.started += instance.OnLeftTrigger;
+                LeftTrigger.performed += instance.OnLeftTrigger;
+                LeftTrigger.canceled += instance.OnLeftTrigger;
+                RightTrigger.started += instance.OnRightTrigger;
+                RightTrigger.performed += instance.OnRightTrigger;
+                RightTrigger.canceled += instance.OnRightTrigger;
             }
         }
     }
@@ -250,6 +278,7 @@ public class InputPlayerControls : IInputActionCollection
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnTriggers(InputAction.CallbackContext context);
+        void OnLeftTrigger(InputAction.CallbackContext context);
+        void OnRightTrigger(InputAction.CallbackContext context);
     }
 }

@@ -22,9 +22,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Triggers",
+                    "name": "Left Trigger",
                     "type": "Button",
                     "id": "3530e82a-352d-4472-8d64-e9fb71781470",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Right Trigger",
+                    "type": "Button",
+                    "id": "d9047ac5-f82a-4ebb-839d-0252f8a74938",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -115,7 +123,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Triggers",
+                    "action": "Left Trigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -126,7 +134,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Triggers",
+                    "action": "Right Trigger",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "def7e11b-c427-46eb-8900-3aea9410c787",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Trigger",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

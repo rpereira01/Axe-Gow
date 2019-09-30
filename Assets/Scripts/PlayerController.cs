@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1)] public float SpeedRotation;
     [Range(0,100)] public float ThrowPower;
     public bool _isAiming;
+    public bool _isThrowingAxe;
     public bool _axeThrown;
     public bool _canPull;
 
@@ -113,32 +114,36 @@ public class PlayerController : MonoBehaviour
         _axeThrown = true;
         Axe.GetComponent<Rigidbody>().isKinematic = false;
         Axe.transform.parent = null;
-        Axe.GetComponent<Rigidbody>().AddForce(transform.forward * ThrowPower, ForceMode.Impulse);
+        Axe.GetComponent<Rigidbody>().AddForce(mainCamera.transform.TransformDirection(Vector3.forward) * ThrowPower, ForceMode.Impulse);
     }
 
     void OnEnable()
     {
         _controls.Movement.Move.Enable();
         _controls.Movement.Rotate.Enable();
-        _controls.Movement.Triggers.Enable();
+        _controls.Movement.LeftTrigger.Enable();
+        _controls.Movement.RightTrigger.Enable();
     }
 
     void OnDisable()
     {
         _controls.Movement.Move.performed -= OnMove;
         _controls.Movement.Rotate.performed -= OnRotate;
-        _controls.Movement.Triggers.performed -= OnTriggers;
+        _controls.Movement.LeftTrigger.performed -= OnTriggerLeft;
+        _controls.Movement.RightTrigger.performed -= OnTriggerRight;
 
         _controls.Movement.Move.Disable();
         _controls.Movement.Rotate.Disable();
-        _controls.Movement.Triggers.Disable();
+        _controls.Movement.LeftTrigger.Disable();
+        _controls.Movement.RightTrigger.Disable();
     }
 
     private void ControlsInitialization()
     {
         _controls.Movement.Move.performed += OnMove;
         _controls.Movement.Rotate.performed += OnRotate;
-        _controls.Movement.Triggers.performed += OnTriggers;
+        _controls.Movement.LeftTrigger.performed += OnTriggerLeft;
+        _controls.Movement.RightTrigger.performed += OnTriggerRight;
 
         _controls.Movement.Move.canceled += ctx =>
         {
@@ -151,16 +156,22 @@ public class PlayerController : MonoBehaviour
             _rotation = Vector3.zero;    
         };
 
-        _controls.Movement.Triggers.canceled += ctx =>
+        _controls.Movement.LeftTrigger.canceled += ctx =>
         {
             if(_isAiming) 
             {
                 _isAiming = false;
                 _animator.SetBool("isAiming", false);
+            }
+
+            if(_isThrowingAxe)
+            {
+                _isThrowingAxe = false;
+                _animator.SetBool("isThrowing", false);
             }     
 
             if(_axeThrown)
-            {
+            {                
                 _canPull = true;
             }            
         };
@@ -177,32 +188,43 @@ public class PlayerController : MonoBehaviour
         _rotation = new Vector3(0, context.ReadValue<Vector2>().x , 0);
     }
 
-    void OnTriggers(InputAction.CallbackContext context)
+    void OnTriggerLeft(InputAction.CallbackContext context)
     {
-        if(context.action.activeControl.name.ToString() == "leftTrigger")
-        {
-            _isAiming = true;
-            SetState(_aimState);
+        // if(context.action.activeControl.name.ToString() == "leftTrigger")
+        // {
+        //     if(!_isThrowingAxe)
+        //     {
+        //         _isAiming = true;
+        //         SetState(_aimState);
+        //     }else{
+        //         CameraZoom();
+        //     }  
+        // }
 
-            return;     
-        }
+    }    
 
-        if(context.action.activeControl.name.ToString() == "rightTrigger")
-        {
-            if(!_isAiming)
-            {
-                if(!_axeThrown)
-                {
-                    SetState(_throwState);
-                }                
-            }
+    private void OnTriggerRight(InputAction.CallbackContext context)
+    {
+        // if(context.action.activeControl.name.ToString() == "rightTrigger")
+        // {
+        //     if(_isAiming)
+        //     {
+        //         if(!_axeThrown)
+        //         {
+        //             _isThrowingAxe = true;
+        //             SetState(_throwState);
+        //         }                
+        //     }
 
-            if(_canPull)
-            {
-                //SetState(_pullState);
-            }
+        //     if(_canPull)
+        //     {
+        //         //SetState(_pullState);
+        //     }
+        // }
+    }
 
-            return;
-        }
+    private void CameraZoom()
+    {
+        //zoom
     }
 }
