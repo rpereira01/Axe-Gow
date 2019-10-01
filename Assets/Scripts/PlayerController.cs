@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 50)] public float SpeedMultiplier;
     [Range(0, 1)] public float SpeedRotation;
     [Range(0,100)] public float ThrowPower;
+    [Range(0,300)] public float AxeRotationPower;
     public bool _isAiming;
     public bool _isThrowingAxe;
     public bool _axeThrown;
@@ -25,7 +26,8 @@ public class PlayerController : MonoBehaviour
     private Aim _aimState;
     private Throw _throwState;
 
-    public GameObject mainCamera;
+    public GameObject MainCamera;
+    public GameObject CineMachine;
     public GameObject Axe;
     [SerializeField] private InputPlayerControls _controls;
     [HideInInspector] public Rigidbody _rigidbody;
@@ -97,8 +99,8 @@ public class PlayerController : MonoBehaviour
 
     void camDirection()
     {
-        camRight = mainCamera.transform.right;
-        camForward = mainCamera.transform.forward;
+        camRight = MainCamera.transform.right;
+        camForward = MainCamera.transform.forward;
 
         camRight.y = 0;
         camForward.y = 0;
@@ -114,7 +116,9 @@ public class PlayerController : MonoBehaviour
         _axeThrown = true;
         Axe.GetComponent<Rigidbody>().isKinematic = false;
         Axe.transform.parent = null;
-        Axe.GetComponent<Rigidbody>().AddForce(mainCamera.transform.TransformDirection(Vector3.forward) * ThrowPower, ForceMode.Impulse);
+        Axe.GetComponent<Rigidbody>().AddForce(MainCamera.transform.TransformDirection(Vector3.forward) * ThrowPower, ForceMode.Impulse);
+        Axe.GetComponent<Rigidbody>().AddTorque(Axe.transform.TransformDirection(Vector3.up) * AxeRotationPower, ForceMode.Impulse);
+        _isThrowingAxe = false;
     }
 
     void OnEnable()
@@ -158,22 +162,13 @@ public class PlayerController : MonoBehaviour
 
         _controls.Movement.LeftTrigger.canceled += ctx =>
         {
-            if(_isAiming) 
-            {
-                _isAiming = false;
-                _animator.SetBool("isAiming", false);
-            }
+            _isAiming = false; 
+            CineMachine.GetComponent<CinemachineFollowZoom>().enabled = false;
+        };
 
-            if(_isThrowingAxe)
-            {
-                _isThrowingAxe = false;
-                _animator.SetBool("isThrowing", false);
-            }     
-
-            if(_axeThrown)
-            {                
-                _canPull = true;
-            }            
+        _controls.Movement.RightTrigger.canceled += ctx =>
+        {
+            
         };
     }
 
@@ -190,41 +185,40 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerLeft(InputAction.CallbackContext context)
     {
-        // if(context.action.activeControl.name.ToString() == "leftTrigger")
-        // {
-        //     if(!_isThrowingAxe)
-        //     {
-        //         _isAiming = true;
-        //         SetState(_aimState);
-        //     }else{
-        //         CameraZoom();
-        //     }  
-        // }
-
+        if(context.action.activeControl.name.ToString() == "leftTrigger")
+        {
+            if(!_isAiming)
+            {
+                _isAiming = true;
+                SetState(_aimState);
+            }else{
+                CameraZoom();
+            }  
+        }
     }    
 
     private void OnTriggerRight(InputAction.CallbackContext context)
     {
-        // if(context.action.activeControl.name.ToString() == "rightTrigger")
-        // {
-        //     if(_isAiming)
-        //     {
-        //         if(!_axeThrown)
-        //         {
-        //             _isThrowingAxe = true;
-        //             SetState(_throwState);
-        //         }                
-        //     }
+        if(context.action.activeControl.name.ToString() == "rightTrigger")
+        {
+            if(_isAiming)
+            {
+                if(!_axeThrown)
+                {
+                    _isThrowingAxe = true;
+                    SetState(_throwState);
+                } 
 
-        //     if(_canPull)
-        //     {
-        //         //SetState(_pullState);
-        //     }
-        // }
+                if(_canPull)
+                {
+                    //SetState(_pullState);
+                }               
+            }           
+        }
     }
 
     private void CameraZoom()
     {
-        //zoom
+        CineMachine.GetComponent<CinemachineFollowZoom>().enabled = true;
     }
 }

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 107859825}
   - component: {fileID: 107859824}
   - component: {fileID: 107859826}
+  - component: {fileID: 107859827}
   m_Layer: 0
   m_Name: CM_ThirdPerson
   m_TagString: Untagged
@@ -286,6 +287,22 @@ MonoBehaviour:
   m_Damping: 2.7
   m_DampingWhenOccluded: 0.21
   m_OptimalTargetDistance: 0
+--- !u!114 &107859827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 107859823}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4700f9f03ad19f94baf0367cb7a9c988, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Width: 2
+  m_Damping: 7
+  m_MinFOV: 3
+  m_MaxFOV: 60
 --- !u!1 &144158809
 GameObject:
   m_ObjectHideFlags: 3
@@ -354,7 +371,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 144158809}
-  m_LocalRotation: {x: 0.086244695, y: 0.07862633, z: -0.0068279393, w: 0.9931431}
+  m_LocalRotation: {x: 0.08624465, y: 0.07862633, z: -0.006827939, w: 0.99314314}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1185,7 +1202,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719335030}
-  m_LocalRotation: {x: 0.043835677, y: 0.0788459, z: -0.0034704427, w: 0.99591655}
+  m_LocalRotation: {x: 0.043835677, y: 0.078845896, z: -0.003470441, w: 0.99591655}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1462,7 +1479,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 908885106}
-  m_LocalRotation: {x: 0.056135584, y: 0.07879701, z: -0.004444152, w: 0.99529904}
+  m_LocalRotation: {x: 0.056135587, y: 0.07879702, z: -0.0044441535, w: 0.995299}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1672,7 +1689,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.04383568, y: 0.0788459, z: -0.0034704357, w: 0.9959165}
+  m_LocalRotation: {x: 0.043835685, y: 0.0788459, z: -0.003470436, w: 0.9959165}
   m_LocalPosition: {x: 0.31226528, y: 2.5, z: -3.1847277}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1867,11 +1884,14 @@ MonoBehaviour:
   _rotation: {x: 0, y: 0, z: 0}
   SpeedMultiplier: 6.5
   SpeedRotation: 1
-  ThrowPower: 22.8
+  ThrowPower: 61.3
+  AxeRotationPower: 300
   _isAiming: 0
+  _isThrowingAxe: 0
   _axeThrown: 0
   _canPull: 0
-  mainCamera: {fileID: 963194225}
+  MainCamera: {fileID: 963194225}
+  CineMachine: {fileID: 107859823}
   Axe: {fileID: 256283754}
   _rigidbody: {fileID: 0}
   _animator: {fileID: 0}
