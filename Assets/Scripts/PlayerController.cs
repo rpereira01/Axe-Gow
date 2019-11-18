@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
     void SetState(State state)
     {
+        Rigidbody2D lol = new Rigidbody2D();
         _state = state;
     }
     

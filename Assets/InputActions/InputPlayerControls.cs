@@ -1,14 +1,15 @@
 // GENERATED AUTOMATICALLY FROM 'Assets/InputActions/InputPlayerControls.inputactions'
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public class InputPlayerControls : IInputActionCollection
+public class @InputPlayerControls : IInputActionCollection, IDisposable
 {
     private InputActionAsset asset;
-    public InputPlayerControls()
+    public @InputPlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputPlayerControls"",
@@ -167,14 +168,14 @@ public class InputPlayerControls : IInputActionCollection
     ""controlSchemes"": []
 }");
         // Movement
-        m_Movement = asset.GetActionMap("Movement");
-        m_Movement_Move = m_Movement.GetAction("Move");
-        m_Movement_Rotate = m_Movement.GetAction("Rotate");
-        m_Movement_LeftTrigger = m_Movement.GetAction("Left Trigger");
-        m_Movement_RightTrigger = m_Movement.GetAction("Right Trigger");
+        m_Movement = asset.FindActionMap("Movement", throwIfNotFound: true);
+        m_Movement_Move = m_Movement.FindAction("Move", throwIfNotFound: true);
+        m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
+        m_Movement_LeftTrigger = m_Movement.FindAction("Left Trigger", throwIfNotFound: true);
+        m_Movement_RightTrigger = m_Movement.FindAction("Right Trigger", throwIfNotFound: true);
     }
 
-    ~InputPlayerControls()
+    public void Dispose()
     {
         UnityEngine.Object.Destroy(asset);
     }
@@ -227,8 +228,8 @@ public class InputPlayerControls : IInputActionCollection
     private readonly InputAction m_Movement_RightTrigger;
     public struct MovementActions
     {
-        private InputPlayerControls m_Wrapper;
-        public MovementActions(InputPlayerControls wrapper) { m_Wrapper = wrapper; }
+        private @InputPlayerControls m_Wrapper;
+        public MovementActions(@InputPlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Movement_Move;
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
         public InputAction @LeftTrigger => m_Wrapper.m_Movement_LeftTrigger;
@@ -242,34 +243,34 @@ public class InputPlayerControls : IInputActionCollection
         {
             if (m_Wrapper.m_MovementActionsCallbackInterface != null)
             {
-                Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
-                Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
-                LeftTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
-                LeftTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
-                LeftTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
-                RightTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
-                RightTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
-                RightTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
+                @Move.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnMove;
+                @Rotate.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRotate;
+                @LeftTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                @LeftTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                @LeftTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnLeftTrigger;
+                @RightTrigger.started -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
+                @RightTrigger.performed -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
+                @RightTrigger.canceled -= m_Wrapper.m_MovementActionsCallbackInterface.OnRightTrigger;
             }
             m_Wrapper.m_MovementActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
-                Rotate.started += instance.OnRotate;
-                Rotate.performed += instance.OnRotate;
-                Rotate.canceled += instance.OnRotate;
-                LeftTrigger.started += instance.OnLeftTrigger;
-                LeftTrigger.performed += instance.OnLeftTrigger;
-                LeftTrigger.canceled += instance.OnLeftTrigger;
-                RightTrigger.started += instance.OnRightTrigger;
-                RightTrigger.performed += instance.OnRightTrigger;
-                RightTrigger.canceled += instance.OnRightTrigger;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
+                @LeftTrigger.started += instance.OnLeftTrigger;
+                @LeftTrigger.performed += instance.OnLeftTrigger;
+                @LeftTrigger.canceled += instance.OnLeftTrigger;
+                @RightTrigger.started += instance.OnRightTrigger;
+                @RightTrigger.performed += instance.OnRightTrigger;
+                @RightTrigger.canceled += instance.OnRightTrigger;
             }
         }
     }
