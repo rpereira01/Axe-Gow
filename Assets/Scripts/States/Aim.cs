@@ -11,6 +11,6 @@ public class Aim : State
 
     public override void Tick()
     {
-        _context._animator.SetBool("isAiming", _context._isAiming);   
+        // _context._animator.SetBool("isAiming", _context._isAiming);   
     }
 }

@@ -11,6 +11,6 @@ public class Throw : State
 
     public override void Tick()
     {
-        _context._animator.SetBool("isThrowing", _context._isThrowingAxe);
+        // _context._animator.SetBool("isThrowing", _context._isThrowingAxe);
     }
 }

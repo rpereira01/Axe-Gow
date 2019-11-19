@@ -11,6 +11,6 @@ public class Idle : State
 
     public override void Tick()
     {
-        _context._animator.SetBool("isWalking", false);     
+        // _context._animator.SetBool("isWalking", false);     
     }
 }
